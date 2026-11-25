@@ -1,26 +1,78 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #222327;
+  --depth: #0d3837;
+  --print: #00856e;
+  --petal: #fdb4e5;
+  --stamp: #d745a8;
+  --paper: #f8f1f5;
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+.dark {
+  --background: var(--ink);
+  --foreground: var(--paper);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-great-vibes);
+  --font-script: var(--font-marck);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
 }
 
 body {
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.font-display {
+  font-family: var(--font-great-vibes), cursive;
+}
+
+.font-script {
+  font-family: var(--font-marck), cursive;
+}
+
+.notebook-rule {
+  border-bottom: 1px solid color-mix(in srgb, var(--depth) 25%, transparent);
+}
+
+.kana-hero {
+  font-size: clamp(7rem, 28vw, 18rem);
+  line-height: 0.8;
+  color: var(--print);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kana-hero {
+    animation: rise 0.9s ease both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kana-hero {
+    animation: none;
+  }
 }
